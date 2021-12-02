@@ -28,4 +28,4 @@ jobs:
       - name: Verify MySQL connection from host
         run: |
           sudo apt-get install -y mysql-client
-          mysql --host 127.0.0.1 --port 3606 -uroot -proot -e
+          mysql --host 127.0.0.1 --port 3606 -uroot -proot -e "SHOW DATABSES"
