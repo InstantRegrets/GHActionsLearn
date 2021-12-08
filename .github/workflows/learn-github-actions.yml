@@ -12,16 +12,10 @@ on:
 jobs:
   test-host:
     runs-on: ubuntu-latest
-    services:
-      mysql:
-        image: mysql:5.7
-        env:
-          MYSQL_ROOT_PASSWORD: root
-        ports:
-          - 3606:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     steps:
-      - name: Verify MySQL connection from host
+      - name: downcase REPO
         run: |
-          sudo apt-get install -y mysql-client
-          mysql --host 127.0.0.1 --port 3606 -uroot -proot -e "SHOW DATABASES"
+          echo "REPO_LOWERCASE=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
+      - name: still present in the next step?
+        run: |
+          echo ${REPO_LOWERCASE}
